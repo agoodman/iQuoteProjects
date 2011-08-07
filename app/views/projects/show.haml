@@ -2,36 +2,36 @@
 %p Now, select from the available options to define the features you want in your app.
 
 - if ! @project.feature_requests.empty?
-	%p= link_to 'Complete Estimate', project_report_path
+	%p.control= link_to 'Complete Estimate', project_report_path
 	
-%table.categories
+.categories
 	- for category in @project.user.categories
-		%tr.header
-			%td{:colspan => 2}= category.title
-		- for feature in category.features
-			%tr
-				%td= feature.title
-				%td.control
-					- if @project.features.include?(feature)
-						- feature_request = @project.feature_requests.select {|req| req.feature==feature}.first
-						%span{:id => "control_edit_#{dom_id(feature)}"}
-							= feature_request.quantity
-							= link_to_function "edit", "$('#edit_#{dom_id(feature_request)}').show();$('#control_edit_#{dom_id(feature)}').hide()"
-						= form_for feature_request, :html => { :style => "display:none" } do |f|
-							= f.label :quantity
-							= f.text_field :quantity, :size => 2
-							= f.submit 'Save'
-							= link_to_function 'cancel', "$('#edit_#{dom_id(feature_request)}').hide();$('#control_edit_#{dom_id(feature)}').show()"
-						= link_to 'delete', feature_request, :method => :delete
-					- else
-						= link_to_function 'add', "$('#add_#{dom_id(feature)}').show();$('#control_add_#{dom_id(feature)}').hide()", :id => "control_add_#{dom_id(feature)}"
-						= form_for FeatureRequest.new, :html => { :id => "add_#{dom_id(feature)}", :style => "display:none" } do |f|
-							= f.hidden_field :project_id, :value => @project.id
-							= f.hidden_field :feature_id, :value => feature.id
-							= f.label :quantity
-							= f.text_field :quantity, :size => 2
-							= f.submit 'Add Feature'
-							= link_to_function 'cancel', "$('#add_#{dom_id(feature)}').hide();$('#control_add_#{dom_id(feature)}').show()"
+		%h3= category.title
+		%table
+			- for feature in category.features
+				%tr
+					%td= feature.title
+					%td.control
+						- if @project.features.include?(feature)
+							- feature_request = @project.feature_requests.select {|req| req.feature==feature}.first
+							%span{:id => "control_edit_#{dom_id(feature)}"}
+								x #{feature_request.quantity}
+								= link_to_function "edit", "$('#edit_#{dom_id(feature_request)}').show();$('#control_edit_#{dom_id(feature)}').hide()", :class => 'pencil'
+							= form_for feature_request, :html => { :style => "display:none" } do |f|
+								= f.label :quantity
+								= f.text_field :quantity, :size => 2
+								= f.submit 'Save'
+								= link_to_function 'Cancel', "$('#edit_#{dom_id(feature_request)}').hide();$('#control_edit_#{dom_id(feature)}').show()"
+							= link_to 'delete', feature_request, :method => :delete, :class => 'trash'
+						- else
+							= link_to_function 'Add', "$('#add_#{dom_id(feature)}').show();$('#control_add_#{dom_id(feature)}').hide()", :id => "control_add_#{dom_id(feature)}", :class => 'plus'
+							= form_for FeatureRequest.new, :html => { :id => "add_#{dom_id(feature)}", :style => "display:none" } do |f|
+								= f.hidden_field :project_id, :value => @project.id
+								= f.hidden_field :feature_id, :value => feature.id
+								= f.label :quantity
+								= f.text_field :quantity, :size => 2
+								= f.submit 'Add Feature'
+								= link_to_function 'Cancel', "$('#add_#{dom_id(feature)}').hide();$('#control_add_#{dom_id(feature)}').show()"
 
 - if ! @project.feature_requests.empty?
-	%p= link_to 'Complete Estimate', project_report_path
+	%p.control= link_to 'Complete Estimate', project_report_path

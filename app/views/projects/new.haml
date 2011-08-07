@@ -1,26 +1,26 @@
-= form_for [@user,@project], :url => user_projects_path(@user) do |f|
+= form_for @project, :url => user_projects_path(@user) do |f|
 	%h1 New Project
 	%p I'll guide you through the process as we go. Let's get started!
 
 	%h2 Who Are You?
 	%p
-		Email: 
+		= f.label :email
 		= f.text_field :email
 	
 	%h2 What Do You Want To Call This Project?
 	%p
-		Title:
+		= f.label :title
 		= f.text_field :title
 		
 	%h2 When Would You Like Work To Begin?
 	%p
-		Starting Date:
-		= f.text_field :starts_on
+		= f.label :starts_on, 'Starting Date'
+		= f.text_field :starts_on, :class => 'datepicker'
 
 	%h2 When Does It Need To Be Done?
 	%p
-		Delivery Date:
-		= f.text_field :ends_on
+		= f.label :ends_on, 'Delivery Date'
+		= f.text_field :ends_on, :class => 'datepicker'
 
 	%h2 How Would You Describe The Level of Completeness?
 	%ul
@@ -40,4 +40,4 @@
 			= f.radio_button :design_completeness, :value => 5
 			Fully designed with high resolution graphics ready
 			
-	%p= f.submit 'Save + Continue'
+	%p.control= f.submit 'Save + Continue'

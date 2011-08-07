@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   has_one :price_group
   has_many :categories
   has_many :projects
+
+  validates_presence_of :points_per_iteration, :price_per_iteration, :base_points
   
   after_create :generate_default_price_group
   

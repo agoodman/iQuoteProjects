@@ -1,11 +1,35 @@
+@font-face { font-family: Revolution; src: url('/stylesheets/m44.TTF'); }
+@font-face { font-family: LostPet; src: url('/stylesheets/m46.TTF'); }
 html { margin: 0; padding: 0; }
-body { font-size: 12pt; }
-table { border: 0; }
-th { font-size: 8pt; text-align: left; }
-td { vertical-align: top; }
+body { font-size: 12pt; font-family: LostPet; background: url('/images/butler1.jpg') top left no-repeat; margin: 0; padding: 0; }
+table { border: 0; width: 100%; padding: 0; margin: 0; border-collapse: collapse; }
+th { font-size: 8pt; text-align: left; padding: 5px; }
+td { vertical-align: top; padding: 5px; }
+hr { border: 0; visibility: hidden; clear: both; margin: 0 0 10px 0; }
+ul { list-style: none; margin: 0; padding: 0; }
+a { text-decoration: none; }
+h1, h2, h3, h4 { margin: 0; padding: 0; }
+h2 { margin-top: 25px; }
+#header, #main, #footer { padding-top: 10px; }
+#header .step { float: left; padding: 10px; width: 10em; border-bottom: 1px solid black; font-size: 14pt; }
+#header .active { background: #eee; }
+#header .step span { margin: 10px; font-size: 20pt; }
+#header ul { margin-left: 75px; margin-top: 25px; }
+#header, #main, #footer, .ui-state-error, .ui-state-warning { margin: 0 auto; clear: both; width: 50em; }
+#main .ui-widget { font-family: LostPet; }
+#footer { font-size: 8pt; font-family: Arial; }
+#new_project h2 { font-size: 14pt; font-weight: normal; color: #f2c632; }
+#new_project label { color: #18b333; }
+#new_project li { font-weight: normal; color: #666b6f; }
 .categories { width: 40em; }
-.categories .header { background: #ddd; }
-.categories td { padding: 5px; }
+.categories h3 { background: #ddd; color: #18b333; font-weight: normal; font-size: 12pt; padding: 5px; }
+.categories td { padding: 5px; color: #666b6f; border-top: 1px solid #666b6f; }
+.categories tr:first-child td { border: none; }
+.categories td:first-child { width: 20em; }
 .categories td.control { text-align: right; }
-.categories th { padding: 5px; }
+.categories th { padding: 5px; font-weight: normal; }
 .categories form { display: inline; }
+.categories a, .categories input[type=submit] { font-size: 10pt; }
+#features td:first-child { width: 35em; }
+.summary td:first-child, .info td:first-child { width: 20em; font-size: 12pt; color: #666b6f; }
+.summary td, .info td { font-size: 28pt; color: #f2c632; }

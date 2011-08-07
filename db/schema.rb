@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110807081143) do
+ActiveRecord::Schema.define(:version => 20110807192307) do
 
   create_table "categories", :force => true do |t|
     t.integer  "user_id"
@@ -59,7 +59,6 @@ ActiveRecord::Schema.define(:version => 20110807081143) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "design_completeness"
-    t.integer  "base_points"
   end
 
   create_table "users", :force => true do |t|
@@ -73,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20110807081143) do
     t.datetime "updated_at"
     t.integer  "points_per_iteration"
     t.float    "price_per_iteration"
+    t.integer  "base_points"
   end
 
   add_index "users", ["api_token"], :name => "index_users_on_api_token"

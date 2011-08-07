@@ -7,7 +7,19 @@
 	%link{:rel=>"stylesheet", :href=>"http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/themes/black-tie/jquery-ui.css", :type=>"text/css", :media=>"all"}
 	= csrf_meta_tag
 	%body
-		#header I Quote Projects
+		#header
+			%ul
+				%li.step.new
+					%span 1.
+					General Info
+				%li.step.show
+					%span 2.
+					Select Features
+				%li.step.report
+					%span 3.
+					View Report
+			%hr
+				
 		- if flash[:alert]
 			.ui-state-error=raw flash[:alert]
 		- if flash[:notice]
@@ -16,3 +28,7 @@
 		#main= yield
 		#footer
 			© 2011 Migrant Studios LLC. All rights reserved.
+
+		%script
+			- if ['new', 'show', 'report'].include?(controller.action_name)
+				$('#header .step.#{controller.action_name}').addClass('active')

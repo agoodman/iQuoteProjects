@@ -13,8 +13,7 @@ class ProjectsController < ApplicationController
     if @project.save
       redirect_to user_project_path(@user,@project)
     else
-      flash[:alert] = @project.errors.full_messages.join("<br/>")
-      render :action => 'new'
+      redirect_to new_user_project_path(@user), :alert => @project.errors.full_messages.join("<br/>")
     end
   end
   
@@ -27,8 +26,7 @@ class ProjectsController < ApplicationController
     if @project.update_attributes(params[:project])
       redirect_to user_project_path(@user,@project), :notice => 'Project updated.'
     else
-      flash[:alert] = @project.errors.full_messages.join("<br/>")
-      render :action => 'show'
+      redirect_to user_project_path(@user,@project), :alert => @project.errors.full_messages.join("<br/>")
     end
   end
   

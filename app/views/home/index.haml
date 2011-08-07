@@ -1,4 +1,7 @@
 %h1 I Quote Projects
-%p My goal is to help you organize your project needs and give you a rough estimate of project development time and cost.
-= link_to 'Web App'
-= link_to 'iOS App'
+%p My goal is to help project managers organize project needs and provide a rough estimate of project development time and cost.
+
+%h2 Affiliates
+%ul
+	- for user in User.all
+		%li= link_to user.email, user_path(user)

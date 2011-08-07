@@ -1,0 +1,25 @@
+= form_for [@user,@project], :url => user_projects_path(@user) do |f|
+	%h1 New Project
+	%p I'll guide you through the process as we go. Let's get started!
+
+	%h2 Who Are You?
+	%p
+		Email: 
+		= f.text_field :email
+	
+	%h2 What Do You Want To Call This Project?
+	%p
+		Title:
+		= f.text_field :title
+		
+	%h2 When Would You Like To Start?
+	%p
+		Starting Date:
+		= f.text_field :starts_on
+
+	%h2 When Does It Need To Be Done?
+	%p
+		Delivery Date:
+		= f.text_field :ends_on
+
+	%p= f.submit 'Save + Continue'

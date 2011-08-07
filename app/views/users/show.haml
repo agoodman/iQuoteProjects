@@ -1,2 +1,4 @@
-%h1 Account Info
-%p Email: #{@user.email}
+%h1 I Quote Projects
+%p My goal is to help you organize your project needs and give you a rough estimate of project development time and cost.
+= link_to 'Web App', new_user_project_path(@user, :type => 'web')
+= link_to 'iOS App', new_user_project_path(@user, :type => 'ios')

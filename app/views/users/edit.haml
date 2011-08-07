@@ -1,0 +1,62 @@
+%h1 Account Info
+%p Email: #{@user.email}
+
+%h1 Categories
+- if @user.categories.empty?
+	%p None
+- else
+	%table.categories
+		- for category in @user.categories
+			%tr.header
+				%td{:colspan => 3}= category.title
+				%td
+					= link_to_function 'Add Feature', "$('#add_feature_to_#{dom_id(category)}').dialog({modal:true,title:'Create a new feature for category #{category.title}',width:'40em'})"
+					= form_for Feature.new, :html => { :id => "add_feature_to_#{dom_id(category)}", :style => "display:none" } do |f|
+						= f.hidden_field :category_id, :value => category.id
+						%p
+							= f.label :name
+							= f.text_field :name
+						%p
+							= f.label :title
+							= f.text_field :title
+						%p
+							= f.label :points
+							= f.text_field :points, :size => 2
+						%p= f.submit 'Save'
+			- if category.features.empty?
+				%tr
+					%td{:colspan => 4} No features
+			- else
+				%tr
+					%th NAME
+					%th TITLE
+					%th POINTS
+					%th
+				- for feature in category.features
+					%tr
+						%td= feature.name
+						%td= feature.title
+						%td= feature.points
+						%td
+							= link_to_function 'edit', "$('#edit_#{dom_id(feature)}').dialog({modal:true,title:'Edit feature #{feature.name}',width:'40em'})"
+							= link_to 'delete', feature, :method => :delete
+							= form_for feature, :html => { :style => "display:none" } do |f|
+								%p
+									= f.label :name
+									= f.text_field :name
+								%p
+									= f.label :title
+									= f.text_field :title
+								%p
+									= f.label :points
+									= f.text_field :points, :size => 2
+								%p= f.submit 'Update'
+				
+%p= link_to_function 'Add Category', "$('#add_category').dialog({modal:true,title:'Create a new category',width:'40em'})"
+#add_category{:style => "display:none"}
+	= form_for Category.new do |f|
+		= f.hidden_field :user_id, :value => @user.id
+		%p
+			= f.label :title
+			= f.text_field :title
+		%p= f.submit 'Save'

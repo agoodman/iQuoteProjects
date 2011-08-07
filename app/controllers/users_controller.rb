@@ -1,8 +1,12 @@
 class UsersController < Clearance::UsersController
   
-  before_filter :authenticate, :except => [ :new, :create ]
+  before_filter :authenticate, :except => [ :new, :show, :create ]
   
   def show
+    @user = User.find(params[:id])
+  end
+  
+  def edit
     @user = current_user
   end
   
@@ -25,6 +29,7 @@ class UsersController < Clearance::UsersController
   private
   
   def url_after_create
+    current_user = @user
     root_path
   end
   

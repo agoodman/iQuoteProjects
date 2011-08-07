@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
     if @project.update_attributes(params[:project])
-      redirect_to @project, :notice => 'Project updated.'
+      redirect_to user_project_path(@user,@project), :notice => 'Project updated.'
     else
       flash[:alert] = @project.errors.full_messages.join("<br/>")
       render :action => 'show'

@@ -1,10 +1,21 @@
 %h1 Account Info
-%h2 Email: 
-%p= @user.email
-%h2 Points Per Iteration:
-%p= @user.points_per_iteration
-%h2 Price Per Iteration:
-%p= @user.price_per_iteration
+%table
+	%tr
+		%td Email:
+		%td= @user.email
+	%tr
+		%td Points Per Iteration:
+		%td= @user.points_per_iteration
+	%tr
+		%td Price Per Iteration:
+		%td= @user.price_per_iteration
+	%tr
+		%td Price Breaks:
+		%td
+			%ul
+				- for tier in @user.price_group.price_tiers
+					%li #{tier.min_quantity} or more = #{number_to_currency(tier.unit_price)}
+
 %p= link_to_function 'edit', "$('#edit_account').dialog({modal:true,title:'Edit account info',width:'40em'})"
 #edit_account{:style => "display:none"}
 	= form_for @user, :url => { :controller => 'users', :action => 'update' } do |f|
@@ -18,6 +29,7 @@
 			= f.label :price_per_iteration
 			= f.text_field :price_per_iteration, :size => 4
 		%p= f.submit 'Update'
+
 
 %h1 Categories
 - if @user.categories.empty?

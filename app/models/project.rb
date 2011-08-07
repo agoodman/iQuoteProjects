@@ -16,4 +16,8 @@ class Project < ActiveRecord::Base
     return ((total_points*magnifier).to_f / user.points_per_iteration.to_f).ceil
   end
   
+  def estimated_price(iterations)
+    user.price_group.price_tiers.reverse.select {|tier| tier.min_quantity < iterations}.first.unit_price * iterations
+  end
+  
 end

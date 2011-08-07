@@ -22,11 +22,18 @@ class UsersControllerTest < ActionController::TestCase
     end
     
     context "on get show" do
-      setup { get :show }
+      setup { get :show, :id => @user.id }
+      
+      should respond_with :success
+      should assign_to :user
+    end
+
+    context "on get edit" do
+      setup { get :edit }
       
       should ("redirect to sign in"){redirect_to sign_in_path}
     end
-    
+
     context "on put update" do
       setup { put :update, :user => Factory.attributes_for(:user) }
       
@@ -58,16 +65,17 @@ class UsersControllerTest < ActionController::TestCase
       should ("redirect to root"){redirect_to root_path}
     end
     
-    context "on get show" do
-      setup { get :show }
+    context "on get edit" do
+      setup { get :edit }
       
       should respond_with :success
+      should assign_to :user
     end
     
     context "on put update" do
       setup { put :update, :user => Factory.attributes_for(:user) }
       
-      should ("redirect to user"){redirect_to user_path}
+      should ("redirect to user"){redirect_to edit_user_path}
     end
     
     context "on delete destroy" do

@@ -31,4 +31,4 @@
 				%p Note: delivery is past deadline! 
 	%tr
 		%td Total Estimated Cost: 
-		%td= number_to_currency(count*@project.user.price_per_iteration)
+		%td= number_to_currency(@project.estimated_price(count))

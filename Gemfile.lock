@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:agoodman/clearance.git
+  remote: git://github.com/agoodman/clearance.git
   revision: f512588861f9181409c3737d1bf35e89d6954686
   specs:
     clearance (0.10.2)

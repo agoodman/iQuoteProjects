@@ -6,7 +6,7 @@ gem 'rails', '3.0.7'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
-gem 'clearance', :git => 'git@github.com:agoodman/clearance.git'
+gem 'clearance', :git => 'git://github.com/agoodman/clearance.git'
 gem 'haml'
 gem 'jquery-rails'
 

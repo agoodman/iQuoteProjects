@@ -4,6 +4,12 @@
 		%td Email:
 		%td= @user.email
 	%tr
+		%td Company Name:
+		%td= @user.company_name
+	%tr
+		%td Company URL:
+		%td= @user.company_url
+	%tr
 		%td Points Per Iteration:
 		%td= @user.points_per_iteration
 	%tr
@@ -16,12 +22,18 @@
 				- for tier in @user.price_group.price_tiers
 					%li #{tier.min_quantity} or more = #{number_to_currency(tier.unit_price)}
 
-%p= link_to_function 'edit', "$('#edit_account').dialog({modal:true,title:'Edit account info',width:'40em'})"
+%p.control= link_to_function 'edit', "$('#edit_account').dialog({modal:true,title:'Edit account info',width:'40em'})", :class => 'pencil'
 #edit_account{:style => "display:none"}
 	= form_for @user, :url => { :controller => 'users', :action => 'update' } do |f|
 		%p
 			= f.label :email
 			= f.text_field :email
+		%p
+			= f.label :company_name
+			= f.text_field :company_name
+		%p
+			= f.label :company_url
+			= f.text_field :company_url
 		%p
 			= f.label :points_per_iteration
 			= f.text_field :points_per_iteration, :size => 4
@@ -35,41 +47,43 @@
 - if @user.categories.empty?
 	%p None
 - else
-	%table.categories
-		- for category in @user.categories
-			%tr.header
-				%td{:colspan => 3}= category.title
-				%td
-					= link_to_function 'Add Feature', "$('#add_feature_to_#{dom_id(category)}').dialog({modal:true,title:'Create a new feature for category #{category.title}',width:'40em'})"
-					= form_for Feature.new, :html => { :id => "add_feature_to_#{dom_id(category)}", :style => "display:none" } do |f|
-						= f.hidden_field :category_id, :value => category.id
-						%p
-							= f.label :name
-							= f.text_field :name
-						%p
-							= f.label :title
-							= f.text_field :title
-						%p
-							= f.label :points
-							= f.text_field :points, :size => 2
-						%p= f.submit 'Save'
+.categories
+	- for category in @user.categories
+		%h3
+			= category.title
+			.control{:style => 'float:right'}
+				= link_to_function 'Add Feature', "$('#add_feature_to_#{dom_id(category)}').dialog({modal:true,title:'Create a new feature for category #{category.title}',width:'40em'})"
+				= form_for Feature.new, :html => { :id => "add_feature_to_#{dom_id(category)}", :style => "display:none" } do |f|
+					= f.hidden_field :category_id, :value => category.id
+					%p
+						= f.label :name
+						= f.text_field :name
+					%p
+						= f.label :title
+						= f.text_field :title
+					%p
+						= f.label :points
+						= f.text_field :points, :size => 2
+					%p.control= f.submit 'Save'
+			%hr
+		%table
 			- if category.features.empty?
 				%tr
 					%td{:colspan => 4} No features
 			- else
 				%tr
-					%th NAME
 					%th TITLE
+					%th NAME
 					%th POINTS
 					%th
 				- for feature in category.features
 					%tr
-						%td= feature.name
 						%td= feature.title
+						%td= feature.name
 						%td= feature.points
-						%td
-							= link_to_function 'edit', "$('#edit_#{dom_id(feature)}').dialog({modal:true,title:'Edit feature #{feature.name}',width:'40em'})"
-							= link_to 'delete', feature, :method => :delete
+						%td.control
+							= link_to_function 'edit', "$('#edit_#{dom_id(feature)}').dialog({modal:true,title:'Edit feature #{feature.name}',width:'40em'})", :class => 'pencil'
+							= link_to 'delete', feature, :method => :delete, :class => 'trash'
 							= form_for feature, :html => { :style => "display:none" } do |f|
 								%p
 									= f.label :name
@@ -80,13 +94,13 @@
 								%p
 									= f.label :points
 									= f.text_field :points, :size => 2
-								%p= f.submit 'Update'
+								%p.control= f.submit 'Update'
 				
-%p= link_to_function 'Add Category', "$('#add_category').dialog({modal:true,title:'Create a new category',width:'40em'})"
+%p.control= link_to_function 'Add Category', "$('#add_category').dialog({modal:true,title:'Create a new category',width:'40em'})"
 #add_category{:style => "display:none"}
 	= form_for Category.new do |f|
 		= f.hidden_field :user_id, :value => @user.id
 		%p
 			= f.label :title
 			= f.text_field :title
-		%p= f.submit 'Save'
+		%p.control= f.submit 'Save'

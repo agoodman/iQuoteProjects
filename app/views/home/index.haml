@@ -1,4 +1,6 @@
+%p My goal is to help you organize your project needs and give you a rough estimate of project development time and cost.
+
 %h2 Affiliates
-%ul
+%ul.affiliates
 	- for user in User.all
-		%li= link_to user.email, user_path(user)
+		%li= link_to user.company_name, user_path(user)

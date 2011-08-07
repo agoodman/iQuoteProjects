@@ -17,7 +17,7 @@ class Project < ActiveRecord::Base
   end
   
   def estimated_price(iterations)
-    user.price_group.price_tiers.reverse.select {|tier| tier.min_quantity < iterations}.first.unit_price * iterations
+    user.price_group.price_tiers.reverse.select {|tier| tier.min_quantity <= iterations}.first.unit_price * iterations
   end
   
 end

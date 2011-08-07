@@ -9,10 +9,10 @@
 	%body
 		#header I Quote Projects
 		- if flash[:alert]
-			.ui-state-error=raw flash[:alert]
+			#flash.ui-state-error=raw flash[:alert]
 		- if flash[:notice]
-			.ui-state-warning=raw flash[:notice]
+			#flash.ui-state-highlight=raw flash[:notice]
 	
 		#main= yield
 		#footer
-			© 2011 Migrant Studios LLC. All rights reserved.
+			%p © 2011 Migrant Studios LLC. All rights reserved.

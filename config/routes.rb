@@ -8,6 +8,7 @@ IQuote::Application.routes.draw do
   resources :users, :only => [ :new, :show, :create ] do
     resources :projects
   end
+  match '/users/:user_id/projects/:id/report' => 'projects#report', :via => :get, :as => 'project_report'
   resource :user, :only => [ :edit, :update, :destroy ]
   
   resources :categories

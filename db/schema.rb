@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110806215447) do
+ActiveRecord::Schema.define(:version => 20110807022250) do
 
   create_table "categories", :force => true do |t|
     t.integer  "user_id"
@@ -44,17 +44,21 @@ ActiveRecord::Schema.define(:version => 20110806215447) do
     t.date     "ends_on"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "design_completeness"
+    t.integer  "base_points"
   end
 
   create_table "users", :force => true do |t|
     t.string   "email"
-    t.string   "encrypted_password", :limit => 128
-    t.string   "salt",               :limit => 128
-    t.string   "confirmation_token", :limit => 128
-    t.string   "remember_token",     :limit => 128
-    t.string   "api_token",          :limit => 128
+    t.string   "encrypted_password",   :limit => 128
+    t.string   "salt",                 :limit => 128
+    t.string   "confirmation_token",   :limit => 128
+    t.string   "remember_token",       :limit => 128
+    t.string   "api_token",            :limit => 128
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "points_per_iteration"
+    t.float    "price_per_iteration"
   end
 
   add_index "users", ["api_token"], :name => "index_users_on_api_token"

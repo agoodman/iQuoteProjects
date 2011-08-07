@@ -1,6 +1,9 @@
 %h1 Add Features
 %p Now, select from the available options to define the features you want in your app.
 
+- if ! @project.feature_requests.empty?
+	%p= link_to 'Complete Estimate', project_report_path
+	
 %table.categories
 	- for category in @project.user.categories
 		%tr.header
@@ -10,7 +13,7 @@
 				%td= feature.title
 				%td.control
 					- if @project.features.include?(feature)
-						- feature_request = FeatureRequest.find_by_project_id_and_feature_id(@project.id,feature.id)
+						- feature_request = @project.feature_requests.select {|req| req.feature==feature}.first
 						%span{:id => "control_edit_#{dom_id(feature)}"}
 							= feature_request.quantity
 							= link_to_function "edit", "$('#edit_#{dom_id(feature_request)}').show();$('#control_edit_#{dom_id(feature)}').hide()"
@@ -29,3 +32,6 @@
 							= f.text_field :quantity, :size => 2
 							= f.submit 'Add Feature'
 							= link_to_function 'cancel', "$('#add_#{dom_id(feature)}').hide();$('#control_add_#{dom_id(feature)}').show()"
+
+- if ! @project.feature_requests.empty?
+	%p= link_to 'Complete Estimate', project_report_path

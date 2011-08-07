@@ -13,10 +13,10 @@ class UsersController < Clearance::UsersController
   def update
     @user = current_user
     if @user.update_attributes(params[:user])
-      redirect_to url_after_create, :notice => 'User updated.'
+      redirect_to edit_user_path, :notice => 'User updated.'
     else
       flash_errors_after_create
-      render :action => 'new'
+      render :action => 'edit'
     end
   end
   

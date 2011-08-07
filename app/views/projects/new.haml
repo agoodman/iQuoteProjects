@@ -12,7 +12,7 @@
 		Title:
 		= f.text_field :title
 		
-	%h2 When Would You Like To Start?
+	%h2 When Would You Like Work To Begin?
 	%p
 		Starting Date:
 		= f.text_field :starts_on
@@ -22,4 +22,22 @@
 		Delivery Date:
 		= f.text_field :ends_on
 
+	%h2 How Would You Describe The Level of Completeness?
+	%ul
+		%li
+			= f.radio_button :design_completeness, :value => 1
+			Just an idea right now
+		%li
+			= f.radio_button :design_completeness, :value => 2
+			Basic outline for object model
+		%li
+			= f.radio_button :design_completeness, :value => 3
+			Some consideration for user workflows
+		%li
+			= f.radio_button :design_completeness, :value => 4
+			Fully storyboarded workflows
+		%li
+			= f.radio_button :design_completeness, :value => 5
+			Fully designed with high resolution graphics ready
+			
 	%p= f.submit 'Save + Continue'

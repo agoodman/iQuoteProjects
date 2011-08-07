@@ -1,5 +1,23 @@
 %h1 Account Info
-%p Email: #{@user.email}
+%h2 Email: 
+%p= @user.email
+%h2 Points Per Iteration:
+%p= @user.points_per_iteration
+%h2 Price Per Iteration:
+%p= @user.price_per_iteration
+%p= link_to_function 'edit', "$('#edit_account').dialog({modal:true,title:'Edit account info',width:'40em'})"
+#edit_account{:style => "display:none"}
+	= form_for @user, :url => { :controller => 'users', :action => 'update' } do |f|
+		%p
+			= f.label :email
+			= f.text_field :email
+		%p
+			= f.label :points_per_iteration
+			= f.text_field :points_per_iteration, :size => 4
+		%p
+			= f.label :price_per_iteration
+			= f.text_field :price_per_iteration, :size => 4
+		%p= f.submit 'Update'
 
 %h1 Categories
 - if @user.categories.empty?

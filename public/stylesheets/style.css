@@ -2,10 +2,10 @@ html { margin: 0; padding: 0; }
 body { font-size: 12pt; }
 table { border: 0; }
 th { font-size: 8pt; text-align: left; }
+td { vertical-align: top; }
 .categories { width: 40em; }
 .categories .header { background: #ddd; }
 .categories td { padding: 5px; }
 .categories td.control { text-align: right; }
 .categories th { padding: 5px; }
-/*.categories a { float: left; }*/
 .categories form { display: inline; }

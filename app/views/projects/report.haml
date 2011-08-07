@@ -1,0 +1,34 @@
+%h1 Project Report
+%p You're done! Here's a summary report of the estimated project time and cost. 
+
+%table.categories
+	- for category in @project.features.map(&:category).uniq
+		%tr.header
+			%td{:colspan => 2}= category.title
+		%tr
+			%th FEATURE
+			%th QUANTITY
+		- for feature_request in @project.feature_requests.select {|req| req.feature.category==category}
+			%tr
+				%td= feature_request.feature.title
+				%td= feature_request.quantity
+
+%h2 Summary
+%table
+	%tr
+		%td Iterations Required:
+		%td
+			= count=@project.iterations_required
+			weeks
+	%tr
+		%td Projected Start Date:
+		%td= @project.starts_on.to_s(:long)
+	%tr
+		%td Projected Completion Date:
+		%td
+			= (delivery_date = @project.starts_on + count.weeks).to_s(:long)
+			- if delivery_date > @project.ends_on
+				%p Note: delivery is past deadline! 
+	%tr
+		%td Total Estimated Cost: 
+		%td= number_to_currency(count*@project.user.price_per_iteration)

@@ -32,6 +32,10 @@ class ProjectsController < ApplicationController
     end
   end
   
+  def report
+    @project = Project.find(params[:id])
+  end
+  
   def assign_user
     @user = User.find(params[:user_id])
   end

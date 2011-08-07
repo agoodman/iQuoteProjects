@@ -10,5 +10,5 @@ class ProjectTest < ActiveSupport::TestCase
   should validate_presence_of :title
   should validate_presence_of :starts_on
   should validate_presence_of :ends_on
-
+  
 end

@@ -13,18 +13,16 @@
 		%td Points Per Iteration:
 		%td= @user.points_per_iteration
 	%tr
-		%td Price Per Iteration:
-		%td= @user.price_per_iteration
-	%tr
-		%td Price Breaks:
+		%td Iteration Price Breaks:
 		%td
 			%ul
 				- for tier in @user.price_group.price_tiers
-					%li #{tier.min_quantity} or more = #{number_to_currency(tier.unit_price)}
+					%li #{tier.min_quantity} or more = #{number_to_currency(tier.unit_price)}ea
 
-%p.control= link_to_function 'edit', "$('#edit_account').dialog({modal:true,title:'Edit account info',width:'40em'})", :class => 'pencil'
-#edit_account{:style => "display:none"}
+%p.control= link_to_function 'Edit Account Info', "$('#edit_account').dialog({modal:true,title:'Edit account info',width:'40em'})"
+#edit_account.categories{:style => "display:none"}
 	= form_for @user, :url => { :controller => 'users', :action => 'update' } do |f|
+		%h3 Account Info
 		%p
 			= f.label :email
 			= f.text_field :email
@@ -34,13 +32,22 @@
 		%p
 			= f.label :company_url
 			= f.text_field :company_url
+			
+		%h3 Pricing Rules
 		%p
 			= f.label :points_per_iteration
 			= f.text_field :points_per_iteration, :size => 4
-		%p
-			= f.label :price_per_iteration
-			= f.text_field :price_per_iteration, :size => 4
-		%p= f.submit 'Update'
+		= f.fields_for :price_group do |grp|
+			%table.pricing
+				%tr
+					%th MIN QTY
+					%th UNIT PRICE
+				- for price_tier in @user.price_group.price_tiers
+					= grp.fields_for :price_tiers, price_tier do |tier|
+						%tr
+							%td= tier.text_field :min_quantity, :size => 4
+							%td= tier.text_field :unit_price, :size => 4
+		%p.control= f.submit 'Update'
 
 
 %h1 Categories

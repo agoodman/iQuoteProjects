@@ -1,7 +1,7 @@
 class SessionsController < Clearance::SessionsController
   
   def url_after_create
-    root_path
+    edit_user_path
   end
   
   def url_after_destroy

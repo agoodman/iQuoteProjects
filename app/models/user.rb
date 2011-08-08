@@ -5,7 +5,9 @@ class User < ActiveRecord::Base
   has_many :categories
   has_many :projects
 
-  validates_presence_of :points_per_iteration, :price_per_iteration, :base_points
+  validates_presence_of :points_per_iteration, :base_points
+  
+  accepts_nested_attributes_for :price_group
   
   after_create :generate_default_price_group
   

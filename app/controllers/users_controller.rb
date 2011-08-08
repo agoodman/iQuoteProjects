@@ -15,8 +15,7 @@ class UsersController < Clearance::UsersController
     if @user.update_attributes(params[:user])
       redirect_to edit_user_path, :notice => 'User updated.'
     else
-      flash_errors_after_create
-      render :action => 'edit'
+      redirect_to edit_user_path, :alert => @user.errors.full_messages.join("<br/>")
     end
   end
   
@@ -30,7 +29,7 @@ class UsersController < Clearance::UsersController
   
   def url_after_create
     current_user = @user
-    root_path
+    edit_user_path
   end
   
   def url_after_destroy

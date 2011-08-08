@@ -15,4 +15,10 @@
 	
 		#main= yield
 		#footer
-			%p © 2011 Migrant Studios LLC. All rights reserved.
+			%p
+				© 2011 Migrant Studios LLC. All rights reserved.
+				- if signed_in?
+					= link_to 'My Account', edit_user_path
+					= link_to 'Sign Out', sign_out_path, :method => :delete
+				- else
+					= link_to 'Sign In', sign_in_path

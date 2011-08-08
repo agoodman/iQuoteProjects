@@ -19,7 +19,7 @@ h3 hr { margin: 0; }
 #header ul { margin-left: 75px; margin-top: 25px; }
 #header, #main, #footer, #flash { margin: 0 0 0 160px; clear: both; width: 45em; }
 #flash { padding: 10px; }
-#main .ui-widget { font-family: LostPet; }
+.control .ui-widget, #ui-datepicker-div, .ui-dialog.ui-widget { font-family: LostPet; }
 #footer p { font-size: 8pt; font-family: Arial; margin-top: 25px; }
 .affiliates li a { padding: 25px; display: block; border: 1px solid #666b6f; background: #eef; }
 #new_project h2 { font-size: 14pt; font-weight: normal; color: #f2c632; }
@@ -37,3 +37,5 @@ h3 hr { margin: 0; }
 #features td:first-child { width: 35em; }
 .summary td:first-child, .info td:first-child { width: 20em; font-size: 12pt; color: #666b6f; }
 .summary td, .info td { font-size: 28pt; color: #f2c632; }
+.edit_user .pricing td:first-child { width: 6em; }
+table.pricing { width: 20em; }
